@@ -2,6 +2,12 @@
 
 Versión de tatetí hecha con HTML, CSS y JavaScript.
 
+## Qué tiene
+
+- modo oscuro por defecto, con botón para cambiar a modo claro
+- partida contra la computadora
+- regla especial de 3 fichas activas por jugador
+
 ## Regla especial
 
 Cada jugador solamente puede tener 3 fichas activas al mismo tiempo. Cuando pone la cuarta, desaparece la ficha más antigua de ese mismo jugador.

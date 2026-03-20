@@ -1,7 +1,26 @@
 :root {
+  color-scheme: dark;
+  --bg: #07111f;
+  --bg-soft: #0f1b2d;
+  --card: #111d30;
+  --card-soft: #15243a;
+  --text: #ecf3ff;
+  --muted: #98a9c3;
+  --accent: #60a5fa;
+  --accent-soft: rgba(96, 165, 250, 0.18);
+  --x: #f87171;
+  --o: #34d399;
+  --border: rgba(152, 169, 195, 0.18);
+  --shadow: 0 22px 55px rgba(0, 0, 0, 0.36);
+  --button-text: #07111f;
+}
+
+:root[data-theme='light'] {
   color-scheme: light;
   --bg: #f4f7fb;
+  --bg-soft: #f8fbff;
   --card: #ffffff;
+  --card-soft: #f8fbff;
   --text: #1f2937;
   --muted: #6b7280;
   --accent: #2563eb;
@@ -10,6 +29,7 @@
   --o: #10b981;
   --border: #d7deea;
   --shadow: 0 20px 45px rgba(37, 99, 235, 0.12);
+  --button-text: #ffffff;
 }
 
 * {
@@ -20,8 +40,12 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(160deg, #eef4ff 0%, #f8fafc 100%);
+  background: radial-gradient(circle at top, #14253d 0%, var(--bg) 52%, #030712 100%);
   color: var(--text);
+}
+
+:root[data-theme='light'] body {
+  background: linear-gradient(160deg, #eef4ff 0%, #f8fafc 100%);
 }
 
 button,
@@ -29,6 +53,14 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+button {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
 }
 
 .app {
@@ -47,13 +79,20 @@ textarea {
   box-shadow: var(--shadow);
 }
 
-.game {
+.game,
+.info {
   padding: 2rem;
 }
 
 .info {
-  padding: 2rem;
   align-self: start;
+}
+
+.topbar {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .eyebrow {
@@ -79,7 +118,7 @@ h1 {
 .subtitle {
   margin: 0 0 1.5rem;
   color: var(--muted);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .status-panel {
@@ -89,8 +128,9 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
-.status-panel > div {
-  background: #f8fbff;
+.status-panel > div,
+.legend {
+  background: var(--card-soft);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1rem;
@@ -120,26 +160,23 @@ h1 {
 
 .cell {
   aspect-ratio: 1;
-  border: 0;
-  border-radius: 20px;
-  background: #f8fbff;
   border: 1px solid var(--border);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  background: var(--bg-soft);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
   cursor: pointer;
   display: grid;
   place-items: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .cell:hover:not(:disabled) {
-  transform: translateY(-2px);
   border-color: var(--accent);
-  box-shadow: 0 12px 20px rgba(37, 99, 235, 0.16);
+  box-shadow: 0 12px 20px rgba(15, 23, 42, 0.25);
 }
 
 .cell:disabled {
   cursor: default;
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
 .cell-content {
@@ -157,24 +194,38 @@ h1 {
 
 .cell.highlight {
   background: var(--accent-soft);
-  border-color: #93c5fd;
+  border-color: var(--accent);
 }
 
 .actions {
   margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
-#reset-button {
+.primary-button,
+.theme-toggle {
   border: 0;
   border-radius: 999px;
   padding: 0.9rem 1.25rem;
-  background: var(--accent);
-  color: white;
   font-weight: 700;
   cursor: pointer;
 }
 
-#reset-button:hover {
+.primary-button {
+  background: var(--accent);
+  color: var(--button-text);
+}
+
+.theme-toggle {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.theme-toggle:hover,
+.primary-button:hover {
   filter: brightness(1.05);
 }
 
@@ -187,10 +238,6 @@ h1 {
 
 .legend {
   margin-top: 1.5rem;
-  padding: 1rem;
-  border-radius: 18px;
-  background: #f8fbff;
-  border: 1px solid var(--border);
 }
 
 .queue {
@@ -206,5 +253,10 @@ h1 {
   .game,
   .info {
     padding: 1.5rem;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

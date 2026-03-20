@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tatetí de 3 fichas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="card game">
+        <p class="eyebrow">Tatetí especial</p>
+        <h1>Tres fichas por jugador</h1>
+        <p class="subtitle">
+          Cada jugador solo puede tener 3 fichas activas. Al poner la cuarta,
+          desaparece la más vieja.
+        </p>
+
+        <div class="status-panel">
+          <div>
+            <p class="label">Turno actual</p>
+            <p id="turn-indicator" class="value">X</p>
+          </div>
+          <div>
+            <p class="label">Estado</p>
+            <p id="status-message" class="value small">Jugando</p>
+          </div>
+        </div>
+
+        <div id="board" class="board" aria-label="Tablero de tatetí"></div>
+
+        <div class="actions">
+          <button id="reset-button" type="button">Reiniciar partida</button>
+        </div>
+      </section>
+
+      <aside class="card info">
+        <h2>Cómo jugar</h2>
+        <ol>
+          <li>Hacé click en una casilla vacía para poner tu ficha.</li>
+          <li>X empieza siempre.</li>
+          <li>Cuando ya tenés 3 fichas activas, la próxima jugada borra tu ficha más antigua.</li>
+          <li>Gana quien logre una línea de 3.</li>
+        </ol>
+
+        <div class="legend">
+          <h3>Fichas activas</h3>
+          <p id="x-queue" class="queue">X: —</p>
+          <p id="o-queue" class="queue">O: —</p>
+        </div>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
